@@ -1,5 +1,5 @@
 var request = require("request")
-,	_ = require("underscore")
+,	underscore = require("underscore")
 ,	wait = true;
 
 console.log("length", process.argv.length);
