@@ -8,19 +8,24 @@ var request = require("request")
 ,	boardLength = board.length
 ,	row
 ,	rowLength
-,	boardArray = [];
-
-console.log("you are player " + player);
-console.log("boardLength = " + boardLength);
+,	boardArray = []
+,	value
+,	playerCoordinate
+,	finishCoordinate;
 
 for(y = 1; y < boardLength; y = y + 1) {
 	row = board[y];
-	console.log("row " + y + " = " + row);
 	rowLength = board[y].length;
 	for(x = 0; x < rowLength; x = x + 1) {
-		console.log("row[x] = " + row[x]);
 		if (!boardArray[x]) boardArray[x] = [];
-		boardArray[x][y - 1] = row[x];
+		value = row[x];
+		boardArray[x][y - 1] = value;
+		
+		if(value === player) {
+			playerCoordinate = [x,y];
+		} else if (value === "F") {
+			finishCoordinate = [x,y];
+		}
 	}
 }
 
