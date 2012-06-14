@@ -24,13 +24,13 @@ for(y = 0; y < rowCount; y = y + 1) {
 		board[x][y] = value;
 		
 		if(value === player) {
-			playerCoordinate = [x,y];
+			playerCoordinate = {x: x, y: y};
 			board[x][y] = ".";
 		} else if (value === opponent) {
-			opponentCoordinate = [x,y];
+			opponentCoordinate = {x: x, y: y};
 			board[x][y] = ".";
 		} else if (value === "F") {
-			finishCoordinate = [x,y];
+			finishCoordinate = {x: x, y: y};
 		}
 	}
 }
