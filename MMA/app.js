@@ -31,13 +31,37 @@ for(y = 0; y < rowCount; y = y + 1) {
 			board[x][y] = ".";
 		} else if (value === "F") {
 			finishCoordinate = {x: x, y: y};
+			board[x][y] = ".";
 		}
 	}
 }
 
+console.log("RowCount", rowCount);
+console.log("colCount", colCount);
+console.log("Player", playerCoordinate.x, playerCoordinate.y);
+console.log("Opponent", opponentCoordinate.x, opponentCoordinate.y);
+console.log("Finish", finishCoordinate.x, finishCoordinate.y);
+
+console.log(board);
+
+function scoreTile(currentScore, coordinates) {
+	var tile;
+	
+	if(coordinates.x < 0 || coordinates.y < 0 || coordinates.x >= colCount || coordinates.y >= rowCount) return;
+	
+	tile = board[coordinates.x][coordinates.y];
+	
+	if(tile === "." || +tile > currentScore) {
+		board[coordinates.x][coordinates.y] = currentScore;
+		scoreTile(currentScore + 1, {x: coordinates.x, y: coordinates.y + 1});
+		scoreTile(currentScore + 1, {x: coordinates.x, y: coordinates.y - 1});
+		scoreTile(currentScore + 1, {x: coordinates.x + 1, y: coordinates.y});
+		scoreTile(currentScore + 1, {x: coordinates.x - 1, y: coordinates.y});
+	}
+}
+
+scoreTile(0, finishCoordinate);
+
 
 
 console.log(board);
-console.log("Player: " + playerCoordinate);
-console.log("Opponent: " + opponentCoordinate);
-console.log("Finish: " + finishCoordinate);
