@@ -28,7 +28,7 @@ for(y = 0; y < rowCount; y = y + 1) {
 			board[x][y] = ".";
 		} else if (value === opponent) {
 			opponentCoordinate = {x: x, y: y};
-			board[x][y] = ".";
+			board[x][y] = "*";
 		} else if (value === "F") {
 			finishCoordinate = {x: x, y: y};
 			board[x][y] = ".";
@@ -36,13 +36,6 @@ for(y = 0; y < rowCount; y = y + 1) {
 	}
 }
 
-console.log("RowCount", rowCount);
-console.log("colCount", colCount);
-console.log("Player", playerCoordinate.x, playerCoordinate.y);
-console.log("Opponent", opponentCoordinate.x, opponentCoordinate.y);
-console.log("Finish", finishCoordinate.x, finishCoordinate.y);
-
-console.log(board);
 
 function scoreTile(currentScore, coordinates) {
 	var tile;
@@ -62,6 +55,18 @@ function scoreTile(currentScore, coordinates) {
 
 scoreTile(0, finishCoordinate);
 
+function getDirection(){
+	var playerTile = board[playerCoordinate.x][playerCoordinate.y]
+	,	northTile = board[playerCoordinate.x][playerCoordinate.y - 1]
+	,	southTile = board[playerCoordinate.x][playerCoordinate.y + 1]
+	,	eastTile = board[playerCoordinate.x + 1][playerCoordinate.y]
+	,	westTile = board[playerCoordinate.x - 1][playerCoordinate.y];
 
+	if(northTile < playerTile) console.log("N");
+	else if (southTile < playerTile) console.log("S");
+	else if (eastTile < playerTile) console.log("E");
+	else if (westTile < playerTile) console.log("W");
+	else console.log("S");
+}
 
-console.log(board);
+getDirection();
