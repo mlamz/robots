@@ -6,7 +6,7 @@ var request = require("request")
 ,	opponent = player === "1" ? "2" : "1"
 ,	board = input.split("\\n")
 ,	x, y
-,	boardLength = board.length
+,	boardLength = board.length - 1
 ,	row
 ,	rowLength
 ,	boardArray = []
@@ -15,7 +15,7 @@ var request = require("request")
 ,	opponentCoordinate
 ,	finishCoordinate;
 
-for(y = 0; y < boardLength - 1; y = y + 1) {
+for(y = 0; y < boardLength; y = y + 1) {
 	row = board[y + 1];
 	rowLength = row.length;
 	for(x = 0; x < rowLength; x = x + 1) {
@@ -34,6 +34,8 @@ for(y = 0; y < boardLength - 1; y = y + 1) {
 		}
 	}
 }
+
+
 
 console.log(boardArray);
 console.log("Player: " + playerCoordinate);
