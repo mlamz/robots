@@ -10,7 +10,7 @@ describe("maze", function(){
 	*/
 	it("should move south", function(done){
 		getOutput(
-			"You are player 1\n***\n*1*\n*.*",
+			"You are player 1\n'***'\n'*1*'\n'*.*'",
 			function(result){
 				result.should.equal("S\n");
 				done();
@@ -24,7 +24,7 @@ describe("maze", function(){
 	*/
 	it("should move east", function(done){
 		getOutput(
-			"You are player 1\n**\n*1.\n**\n",
+			"You are player 1\n'**'\n'*1.'\n'**'\n",
 			function(result){
 				result.should.equal("E\n");
 				done();
@@ -32,13 +32,12 @@ describe("maze", function(){
 	});
 
 	/*given a maze of 	You are player 1
-						**
-						.1*
-						**
+						***
+						*.1
 	*/
 	it("should move west", function(done){
 		getOutput(
-			"You are player 1\n**\n.1*\n**\n",
+			"You are player 1\n'***'\n'*.1'",
 			function(result){
 				result.should.equal("W\n");
 				done();
@@ -51,7 +50,7 @@ describe("maze", function(){
 	*/
 	it("should move north", function(done){
 		getOutput(
-			"You are player 1\n*.*\n*1*",
+			"You are player 1\n'*.*'\n'*1*'",
 			function(result){
 				result.should.equal("N\n");
 				done();

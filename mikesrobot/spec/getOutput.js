@@ -1,10 +1,22 @@
 var child_process =	require('child_process')
-, 	path = require("path")
-,	process_path = path.join(__dirname, "../app.js")
 ;
 
 function getOutput(maze, callback){
-		var output = '', program = child_process.spawn("node", [process_path, maze]);
+		var output
+		,	program
+		,	mazeArguments
+		;
+		output = '';
+
+		mazeArguments = ['You', 'are', 'player'];
+		mazeArguments.push(maze.slice(15,16));
+		var mazeRows = maze.split('\n');
+		for(var i = 0;i<mazeRows.length;i++){
+			mazeArguments.push(mazeRows[i]);
+		}
+
+		var cmd = "node app.js " + mazeArguments.join(' ');
+		program = child_process.exec(cmd);
 
 		program.stdout.on('data', function(data){
 			output += data.toString();
