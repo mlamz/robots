@@ -1,5 +1,4 @@
 var	mazeRows
-,	row
 ,	maze
 ,	playerNumber
 ,	playerCoordinate
@@ -18,7 +17,8 @@ playerNumber = optimist.argv._[3];
 
 mazeRows = getMazeRows(optimist.argv._);
 maxColCount = getMaxColCount(mazeRows);
-maze = populateMaze(maxColCount);
+maze = populateMaze(maxColCount, mazeRows);
+playerCoordinate = getPlayerCoordinate(maze, playerNumber);
 direction = director.getDirection(maze, playerCoordinate);
 console.log(direction);
 
@@ -41,7 +41,7 @@ function getMazeRows(input){
 
 
 function getMaxColCount(mazeRows){
-	var count = 0;
+	var count = 0, row;
 	for(row = 0;row < mazeRows.length;row++){
 		if (mazeRows[row].length > count){
 			count = mazeRows[row].length;
@@ -50,14 +50,14 @@ function getMaxColCount(mazeRows){
 	return count;
 }
 
-function populateMaze(maximumColumnCount){
-	var result = {};
-	for(rowIndex = 1;row <= mazeRows.length;rowIndex++){
-		row = rowIndex - 1;
+function populateMaze(maximumColumnCount, mazeRows){
+	var result = {}
+	,	rowIndex;
+	for(rowIndex = 0;rowIndex <= mazeRows.length;rowIndex++){
 		for(col = 0;col < maximumColumnCount;col++){
-			if(mazeRows[row]){
-				var currentValue = mazeRows[row][col]
-				,	currentCoordinate = [col,row]
+			if(mazeRows[rowIndex]){
+				var currentValue = mazeRows[rowIndex][col]
+				,	currentCoordinate = [col,rowIndex]
 				;
 				
 				result[currentCoordinate] = currentValue;
@@ -69,6 +69,17 @@ function populateMaze(maximumColumnCount){
 		}
 	}
 	return result;
+}
+
+function getPlayerCoordinate(maze, playerNumber){
+	var coordinate;
+	for(coordinate in maze){
+		if (maze[coordinate] == playerNumber){
+			
+			return [parseInt(coordinate.split(',')[0]),parseInt(coordinate.split(',')[1])];
+		}
+		
+	}
 }
 
 
