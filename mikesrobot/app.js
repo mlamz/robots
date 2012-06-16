@@ -1,18 +1,32 @@
 var	input
-,	boardString
 ,	boardRows
 ,	row
 ,	board
 ,	playerNumber
 ,	playerCoordinate
 ,	maxColCount
+,	optimist
+,	_
 ;
+boardRows = [];
+optimist = require('optimist');
+_ = require('underscore');
+input = optimist.argv._;
 
-input = process.argv[2];
-boardString = input.slice(18);
-boardRows = input.split('\n');
+_.each(input, function(arg){
+	var addRow = false;
+	
+	if(arg.toString().slice(0,1) === "*"){
+		addRow = true;
+	}
+
+	if (addRow){
+		boardRows.push(arg);
+	}
+});
+
 board = {};
-playerNumber = input.slice(15,16);
+playerNumber = input[3];
 
 maxColCount = 0;
 for(row = 0;row < boardRows.length;row++){
@@ -28,15 +42,15 @@ for(rowIndex = 1;row <= boardRows.length;rowIndex++){
 			var currentValue = boardRows[row][col]
 			,	currentCoordinate = [col,row]
 			;
-
+			
 			board[currentCoordinate] = currentValue;
-			if (currentValue === playerNumber){
+			if (currentValue == playerNumber){
 				playerCoordinate = currentCoordinate;
 			}
+			
 		}
 	}
 }
-
 
 function getMazeNode(baseCoordinate, direction){
 	var mazeNodeCoordinate = [];
