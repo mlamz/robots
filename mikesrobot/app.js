@@ -61,10 +61,6 @@ function populateMaze(maximumColumnCount, mazeRows){
 				;
 				
 				result[currentCoordinate] = currentValue;
-				if (currentValue == playerNumber){
-					playerCoordinate = currentCoordinate;
-				}
-				
 			}
 		}
 	}
@@ -75,10 +71,8 @@ function getPlayerCoordinate(maze, playerNumber){
 	var coordinate;
 	for(coordinate in maze){
 		if (maze[coordinate] == playerNumber){
-			
 			return [parseInt(coordinate.split(',')[0]),parseInt(coordinate.split(',')[1])];
 		}
-		
 	}
 }
 
