@@ -14,9 +14,10 @@ _ = require('underscore');
 input = optimist.argv._;
 
 _.each(input, function(arg){
-	var addRow = false;
+	var addRow = false
+	,	firstChar = arg.toString().slice(0,1);
 	
-	if(arg.toString().slice(0,1) === "*"){
+	if(firstChar == "*" || firstChar == "." || firstChar == '_'){
 		addRow = true;
 	}
 
