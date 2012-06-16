@@ -23,9 +23,22 @@ describe("maze", function(){
 			});
 	});
 
+	/*given a maze of 	You are player 1
+						**
+						*1.F
+						**
+	*/
+	it("should move east", function(done){
+		getOutput(
+			"You are player 1\n**\n*1.F\n**\n",
+			function(result){
+				result.should.equal("E\n");
+				done();
+			});
+	});
+
 	function getOutput(maze, callback){
-		maze_string = "You are player 1\n***\n*1*\n*.*\n*F*\n*2*";
-		var output = '', program = child_process.spawn("node", [process_path, maze_string]);
+		var output = '', program = child_process.spawn("node", [process_path, maze]);
 
 		program.stdout.on('data', function(data){
 			output += data.toString();

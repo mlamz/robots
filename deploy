@@ -1,5 +1,5 @@
 #!/bin/sh
 
-zip -r MMA_player.zip MMA 
-curl http://localhost:3000/players --data-binary @MMA_player.zip
+zip -r mikesrobot_player.zip mikesrobot
+curl http://localhost:3000/players --data-binary @mikesrobot_player.zip
     
