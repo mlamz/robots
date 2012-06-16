@@ -1,59 +1,74 @@
-var	input
-,	boardRows
+var	mazeRows
 ,	row
-,	board
+,	maze
 ,	playerNumber
 ,	playerCoordinate
 ,	maxColCount
 ,	optimist
 ,	_
+,	direction
 ;
-boardRows = [];
+
 optimist = require('optimist');
 _ = require('underscore');
-input = optimist.argv._;
+playerNumber = optimist.argv._[3];
 
-_.each(input, function(arg){
-	var addRow = false
-	,	firstChar = arg.toString().slice(0,1);
-	
-	if(firstChar == "*" || firstChar == "." || firstChar == '_'){
-		addRow = true;
-	}
+mazeRows = getMazeRows(optimist.argv._);
+maxColCount = getMaxColCount();
+maze = populateMaze();
+direction = getDirectionToReturn(maze);
+console.log(direction);
 
-	if (addRow){
-		boardRows.push(arg);
-	}
-});
+function getMazeRows(input){
+	var filteredInput = [];
+	_.each(input, function(arg){
+		var addRow = false
+		,	firstChar = arg.toString().slice(0,1);
+		
+		if(firstChar == "*" || firstChar == "." || firstChar == '_'){
+			addRow = true;
+		}
 
-board = {};
-playerNumber = input[3];
-
-maxColCount = 0;
-for(row = 0;row < boardRows.length;row++){
-	if (boardRows[row].length > maxColCount){
-		maxColCount = boardRows[row].length;
-	}
+		if (addRow){
+			filteredInput.push(arg);
+		}
+	});
+	return filteredInput;
 }
 
-for(rowIndex = 1;row <= boardRows.length;rowIndex++){
-	var row = rowIndex - 1;
-	for(col = 0;col < maxColCount;col++){
-		if(boardRows[row]){
-			var currentValue = boardRows[row][col]
-			,	currentCoordinate = [col,row]
-			;
-			
-			board[currentCoordinate] = currentValue;
-			if (currentValue == playerNumber){
-				playerCoordinate = currentCoordinate;
-			}
-			
+
+function getMaxColCount(){
+	var count = 0;
+	for(row = 0;row < mazeRows.length;row++){
+		if (mazeRows[row].length > count){
+			count = mazeRows[row].length;
 		}
 	}
+	return count;
 }
 
-function getMazeNode(baseCoordinate, direction){
+function populateMaze(){
+	var result = {};
+	for(rowIndex = 1;row <= mazeRows.length;rowIndex++){
+		row = rowIndex - 1;
+		for(col = 0;col < maxColCount;col++){
+			if(mazeRows[row]){
+				var currentValue = mazeRows[row][col]
+				,	currentCoordinate = [col,row]
+				;
+				
+				result[currentCoordinate] = currentValue;
+				if (currentValue == playerNumber){
+					playerCoordinate = currentCoordinate;
+				}
+				
+			}
+		}
+	}
+	return result;
+}
+
+function getMazeNode(baseCoordinate, direction, mazeState){
 	var mazeNodeCoordinate = [];
 	switch(direction){
 		case "N":
@@ -70,27 +85,27 @@ function getMazeNode(baseCoordinate, direction){
 			break;
 
 	}
-	return board[mazeNodeCoordinate];
+	return mazeState[mazeNodeCoordinate];
 
 }
 
-getDirectionToReturn();
-function getDirectionToReturn(){
+
+function getDirectionToReturn(mazeState){
 	var northValue, southValue, eastValue, westValue;
 
-	northValue = getMazeNode(playerCoordinate, "N");
-	southValue = getMazeNode(playerCoordinate, "S");
-	eastValue = getMazeNode(playerCoordinate, "E");
-	westValue = getMazeNode(playerCoordinate, "W");
+	northValue = getMazeNode(playerCoordinate, "N", mazeState);
+	southValue = getMazeNode(playerCoordinate, "S", mazeState);
+	eastValue = getMazeNode(playerCoordinate, "E", mazeState);
+	westValue = getMazeNode(playerCoordinate, "W", mazeState);
 
 	if (northValue === "."){
-		console.log("N");
+		return "N";
 	} else if (southValue === '.'){
-		console.log("S");
+		return "S";
 	} else if (eastValue === '.'){
-		console.log("E");
+		return "E";
 	} else if (westValue === '.'){
-		console.log("W");
+		return "W";
 	}
 }
 
