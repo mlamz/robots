@@ -1,5 +1,5 @@
 #!/bin/sh
 
 zip -r MMA_player.zip MMA 
-curl http://172.31.31.25:3000/players --data-binary @MMA_player.zip
+curl http://localhost:3000/players --data-binary @MMA_player.zip
     
