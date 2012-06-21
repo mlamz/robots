@@ -12,7 +12,7 @@ describe("maze", function(){
 		getOutput(
 			"You are player 1\n'***'\n'*1*'\n'*.*'",
 			function(result){
-				result.should.equal("S\n");
+				result.should.equal("S");
 				done();
 			});
 	});
@@ -26,7 +26,7 @@ describe("maze", function(){
 		getOutput(
 			"You are player 1\n'**'\n'*1.'\n'**'\n",
 			function(result){
-				result.should.equal("E\n");
+				result.should.equal("E");
 				done();
 			});
 	});
@@ -39,7 +39,7 @@ describe("maze", function(){
 		getOutput(
 			"You are player 1\n'***'\n'*.1'",
 			function(result){
-				result.should.equal("W\n");
+				result.should.equal("W");
 				done();
 			});
 	});
@@ -52,7 +52,7 @@ describe("maze", function(){
 		getOutput(
 			"You are player 1\n'*.*'\n'*1*'",
 			function(result){
-				result.should.equal("N\n");
+				result.should.equal("N");
 				done();
 			});
 	});

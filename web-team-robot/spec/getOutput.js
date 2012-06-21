@@ -23,6 +23,9 @@ function getOutput(maze, callback){
 		});
 
 		program.stdout.on('end', function(data){
+			if (output.slice(1,2) === "\n" && output.length === 3){
+				output = output.replace("\n","")
+			}
 			callback(output);
 		});
 
