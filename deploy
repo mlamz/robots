@@ -1,5 +1,5 @@
 #!/bin/sh
 
 zip -r mikesrobot_player.zip mikesrobot
-curl http://localhost:3000/players --data-binary @mikesrobot_player.zip
+curl http://10.0.10.36:3000/players --data-binary @mikesrobot_player.zip
     
