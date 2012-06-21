@@ -1,5 +1,5 @@
 #!/bin/sh
 
 zip -r web-team-robot_player.zip web-team-robot
-curl http://localhost:3000/players --data-binary @web-team-robot_player.zip
+curl http://10.0.10.36:3000/players --data-binary @web-team-robot_player.zip
     
