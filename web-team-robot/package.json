@@ -17,6 +17,6 @@
     "node": "*"
   },
   "scripts": {
-    "test": "mocha -R spec spec"
+    "test": "mocha -C -R spec spec"
   }
 }
