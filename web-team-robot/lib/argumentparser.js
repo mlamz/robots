@@ -5,10 +5,17 @@ function ArgumentParser(argv) {
 }
 
 ArgumentParser.prototype.parse = function parse() {
-	var mazeArgs = this.argv.slice(2);
+	var unquotedLines, mazeArgs = this.argv.slice(2)[0];
 
-	//console.log('args are :' + mazeArgs);
-	return new Game(mazeArgs);
+	var lines = mazeArgs.split("\n");
+	var player = lines.shift();
+	var playerNo = parseInt(player[player.length - 1]);
+
+	unquotedLines = lines.map(function(line) {
+		return line.replace(/\'/g, '');
+	});
+
+	return new Game(playerNo, unquotedLines);
 }
 
-module.exports = ArgumentParser
+module.exports = ArgumentParser;

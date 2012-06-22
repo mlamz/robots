@@ -1,9 +1,9 @@
 var Maze = require('./maze');
 
-function Game() {
+function Game(playerNo, mazeLines) {
 
-	this.player = 1;
-	this.maze = new Maze();
+	this.player = playerNo;
+	this.maze = new Maze(mazeLines);
 }
 
 	function getDirection() {
