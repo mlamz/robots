@@ -5,11 +5,11 @@ function ArgumentParser(argv) {
 }
 
 ArgumentParser.prototype.parse = function parse() {
-	var unquotedLines, mazeArgs = this.argv.slice(2)[0];
+	var unquotedLines, mazeArgs = this.argv.slice(5)[0];
 
 	var lines = mazeArgs.split("\n");
 	var player = lines.shift();
-	var playerNo = parseInt(player[player.length - 1]);
+	var playerNo = parseInt(player[0]);
 
 	unquotedLines = lines.map(function(line) {
 		return line.replace(/\'/g, '');
