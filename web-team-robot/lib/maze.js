@@ -2,11 +2,18 @@ function Maze(mazeLines) {
   this.mazeLines = mazeLines
 }
 
-function getLocation(find){
-	return { x: 1, y: 1 };
+function getLocationOf(tile){
+	var yIndex, xIndex;
+
+	for(yIndex = 0; yIndex < this.mazeLines.length; yIndex = yIndex + 1){
+		xIndex = this.mazeLines[yIndex].indexOf(tile); 
+		if (xIndex >= 0){
+			return { x: xIndex, y: yIndex };
+		}		
+	}
 }
 
-Maze.prototype.getLocation = getLocation;
+Maze.prototype.getLocationOf = getLocationOf;
 
 
 module.exports = Maze;

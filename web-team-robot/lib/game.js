@@ -13,7 +13,7 @@ function getDirection() {
 }
 
 function getLocation(){
-	return this.maze.getLocation(this.player.toString());
+	return this.maze.getLocationOf(this.player);
 }
 
 
